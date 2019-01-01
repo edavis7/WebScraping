@@ -46,8 +46,6 @@ def mars_news(browser):
     return news_title, news_p  
 
 if __name__ == "__main__":
-
-    # If running as script, print scraped data
     print(scrape())
 
 # def scrape():
