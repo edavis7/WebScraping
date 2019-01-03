@@ -12,7 +12,7 @@ def init_browser():
     executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
     return Browser('chrome', **executable_path, headless=True)
 
-def scrape():
+def scrape_info():
     browser = init_browser()
     news_title, news_p = mars_news(browser)
     featured_image_url = mars_image(browser)
@@ -20,8 +20,8 @@ def scrape():
     mars = mars_facts(browser)
     hemisphere_image_urls = mars_hemisphere(browser)
 
-
-    data = {
+# Store data in a dictionary
+    mars_data = {
         "news_title":news_title,
         "news_paragraph":news_p,
         "featured_image_url":featured_image_url,
@@ -29,7 +29,7 @@ def scrape():
         "mars_facts":mars,
         "mars_hemisphere":hemisphere_image_urls
     }
-    return data
+    return mars_data
 
 
 def mars_news(browser):
@@ -110,7 +110,7 @@ def mars_current_weather(browser):
         for tweet in mars_tweets:
             mars_weather = tweet.find('p').text
             if 'Sol' and 'pressure' in mars_weather:
-                print(f' Mars weather is {mars_weather}')
+                #print(f' Mars weather is {mars_weather}')
                 break
             else:
                 pass      
@@ -177,4 +177,4 @@ def mars_hemisphere(browser):
     return hemisphere_image_urls    
 
 if __name__ == "__main__":
-    print(scrape())
+    print(scrape_info())
